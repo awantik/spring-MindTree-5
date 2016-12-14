@@ -23,7 +23,15 @@ public class GreetingController {
     public Greeting newGreeting(@RequestParam(value="name", defaultValue="GreatWorld") String name, 
     		@PathVariable("id") int empId) {
         return new Greeting(counter.incrementAndGet(),
-                            String.format(template, name + empId));
+                            String.format(template, name + " " +empId));
     }
+    
+    @RequestMapping("/delnewgreeting/{id}")
+    public Greeting delnewGreeting(@RequestParam(value="name", defaultValue="GreatWorld") String name, 
+    		@PathVariable("id") int empId) {
+        return new Greeting(counter.incrementAndGet(),
+                            String.format(template, name + " " +empId));
+    }
+    
     
 }
