@@ -10,10 +10,17 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Override
+    /*
+	@Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .authorizeRequests()
+        .authorizeRequests()
+        .antMatchers("/admin/*").hasRole("ADMIN")
+        .anyRequest().authenticated()
+        .and()
+        .authorizeRequests()
+            
+                 //Allow all the urls you mention here 
                 .antMatchers("/", "/home").permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -24,11 +31,32 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .logout()
                 .permitAll();
     }
-
+    */
+	@Override
+    protected void configure(HttpSecurity http) throws Exception {
+            http
+                .authorizeRequests()
+                .antMatchers("/admin/*").hasRole("ADMIN")
+                .anyRequest().authenticated()
+                .and()
+            .authorizeRequests()
+                 //Allow all the urls you mention here 
+                .antMatchers("/", "/home").hasRole("ADMIN")
+                .anyRequest().authenticated()
+                .and()
+            .formLogin()
+                .loginPage("/login")
+                .permitAll()
+                .and()
+            .logout()
+                .permitAll();
+    }
+	
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-            .inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER");
+        auth.inMemoryAuthentication().withUser("user").password("password").roles("USER");
+        auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
+        auth.inMemoryAuthentication().withUser("customer").password("customer").roles("CUSTOMER");
+        
     }
 }
