@@ -4,10 +4,11 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+
 public class PersonForm {
 
     @NotNull
-    @Size(min=2, max=30, message="Good Lord")
+    @Size(min=2, max=30,message="fit it in")
     private String name;
 
     @NotNull

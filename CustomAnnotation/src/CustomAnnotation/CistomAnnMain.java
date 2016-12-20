@@ -19,12 +19,15 @@ int value();
 } 
 
 //Marker Annotation - Does not take any argument
+@Retention(RetentionPolicy.RUNTIME)  
 @interface MyMarkerAnnotation{
 	
 }
 
 //Applying annotation  
+@MyMarkerAnnotation
 class Hello{
+	public int name;
 	
 @MyAnnotation(value = 10)  
 public void sayHello(){
@@ -48,12 +51,26 @@ public class CistomAnnMain {
 		Method m=h.getClass().getMethod("sayHello");  
 		  
 		MyAnnotation manno=m.getAnnotation(MyAnnotation.class);  
+		
 		System.out.println("value is: "+manno.value()); 
 		
 		Method m2=h.getClass().getMethod("sayHi");  
 		  
 		MultipleAnnotation manno2=m2.getAnnotation(MultipleAnnotation.class);  
 		System.out.println("value is: "+manno2.key()); 
+		
+		MyMarkerAnnotation ma = Hello.class.getAnnotation(MyMarkerAnnotation.class);
+        System.out.println(ma);
+        
+        Method me[] = Hello.class.getMethods();
+        for(Method mm : me){
+        	System.out.println(mm.getName());
+        }
+        
+        Field f[] = Hello.class.getFields();
+        for(Field ff : f){
+        	System.out.println(f.length);
+        }
 		}
 	
 	    

@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+
 @Component
 public class AppRunner implements CommandLineRunner {
 
@@ -19,7 +20,8 @@ public class AppRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         logger.info(".... Fetching books");
-        logger.info("isbn-1234 -->" + bookRepository.getByIsbn("isbn-1234"));
+        String s = "isbn-1234";
+        logger.info("isbn-1234 -->" + bookRepository.getByIsbn(s));
         logger.info("isbn-4567 -->" + bookRepository.getByIsbn("isbn-4567"));
         logger.info("isbn-1234 -->" + bookRepository.getByIsbn("isbn-1234"));
         logger.info("isbn-4567 -->" + bookRepository.getByIsbn("isbn-4567"));
