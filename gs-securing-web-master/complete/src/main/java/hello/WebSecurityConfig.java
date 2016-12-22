@@ -37,13 +37,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             http
             .authorizeRequests()
                  //Allow all the urls you mention here 
-                .antMatchers("/", "/home","/admin/*").permitAll()
+                .antMatchers("/", "/home").permitAll()
                 .anyRequest().authenticated()
                 .and()
-//             .authorizeRequests()
-//                .antMatchers("/admin/*").hasRole("ADMIN")
-//                .anyRequest().authenticated()
-//                .and()
+             .authorizeRequests()
+                .antMatchers("/admin/*").hasRole("ADMIN")
+                .anyRequest().authenticated()
+                .and()
             .formLogin()
                 .loginPage("/login")
                 .permitAll()
